@@ -1,0 +1,42 @@
+body {
+    background-color: rgb(245, 168, 92);
+    color: rgb(113, 60, 32);
+    font-size: 20px;
+    font-weight: 600;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.avatar1 {
+    width: 450px;
+    border-radius: 28px;
+    
+}
+
+.avatar2 {
+    width: 400px;
+    border-radius: 28px;
+       
+}
+
+.info p {
+    color:rgb(71, 54, 36);
+    margin: 0;
+    font-style: italic;
+    letter-spacing: 2px;
+}
+
+h1 {
+    justify-content: center;
+    display: flex;
+}
+
+hr {
+    background: linear-gradient(to right, rgb(144, 102, 52), rgb(178, 51, 26));
+    height: 5px;
+    border: 0;
+}
+
+.social {
+    color:rgb(41, 21, 10);
+}
