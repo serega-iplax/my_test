@@ -1,0 +1,68 @@
+.form_input label {
+    font-size: 25px;
+    color:rgb(9, 37, 96);
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-weight: bolder;
+}
+
+.form_input input {
+    box-sizing: border-box;
+    color:rgb(0, 0, 0);
+    padding: 10px 0 10px;
+    outline: none;
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+    background-color: rgb(166, 186, 251);
+               
+}
+
+::placeholder {
+  color: rgb(0, 0, 0); 
+}
+
+::-webkit-input-placeholder {
+  color: rgb(0, 0, 0); 
+}
+
+::-moz-placeholder {
+  color: rgb(0, 0, 0);
+  opacity: 1; 
+}
+
+:-ms-input-placeholder {
+  color: rgb(0, 0, 0); 
+}
+
+.label1 {
+    position: relative;
+    left: 50px;
+    top: 3px;
+}
+
+.input1 {
+    position: relative;
+    left: 220px;
+    top: -30px;
+}
+
+.label2 {
+    position: relative;
+    left: 410px;
+    top: -63px;
+}
+
+.input2 {
+    position: relative;
+    left: 595px;
+    top: -98px;
+}
+
+.input3 {
+    position: relative;
+    left: 780px;
+    top: -138px;
+}

@@ -1,5 +1,3 @@
-import pandas as pd
-import plotly.express as px
 import plotly.offline as offline
 import plotly.graph_objects as go
 
@@ -14,8 +12,8 @@ def construct_graphic(coor_x: list[int | float | str], coor_y: list[int | float]
         coor_y (list[int | float]): Список координат y (Например, t - температура)
     """
     
-    const_color_1 = "#8A2BE2"  # Основной цвет
-    const_color_2 = "#EE82EE"  # Цвет для "предсказания"
+    const_color_1 = "#53279A"  # Основной цвет
+    const_color_2 = "#AC2F27"  # Цвет для "предсказания"
 
     fig = go.Figure()
 
@@ -30,7 +28,6 @@ def construct_graphic(coor_x: list[int | float | str], coor_y: list[int | float]
         showlegend=False
     ))
 
-    # Добавляем трейс для отрезка от 5ой до 6ой точки
     fig.add_trace(go.Scatter(
         x=coor_x[-4:-2],
         y=coor_y[-4:-2],
@@ -41,7 +38,6 @@ def construct_graphic(coor_x: list[int | float | str], coor_y: list[int | float]
         showlegend=False
     ))
 
-    # Добавляем трейс для отрезка от 6ой до 7ой точки
     fig.add_trace(go.Scatter(
         x=coor_x[-3:-1],
         y=coor_y[-3:-1],
@@ -52,7 +48,6 @@ def construct_graphic(coor_x: list[int | float | str], coor_y: list[int | float]
         showlegend=False
     ))
 
-        # Добавляем трейс для отрезка от 7ой до 8ой точки
     fig.add_trace(go.Scatter(
         x=coor_x[-3:],
         y=coor_y[-3:],
@@ -65,6 +60,8 @@ def construct_graphic(coor_x: list[int | float | str], coor_y: list[int | float]
 
     # Обновляем макет графика
     fig.update_layout(
+        width=800,
+        height=450,
         title='График погоды',
         xaxis_title='Время',
         yaxis_title='Температура',
@@ -81,8 +78,8 @@ def construct_graphic(coor_x: list[int | float | str], coor_y: list[int | float]
     offline.plot(fig, filename='graphic_html.html', auto_open=False, include_plotlyjs='cdn')
     
  # Тестовые данные   
-test_x = ['5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00']
-test_y = [-6, -4, -2, 0, 1, 3, 5, 7]
+test_x = ['6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00']
+test_y = [-6, -4, -2, 0, 1, 3, 5, 7, 9]
 
 construct_graphic(coor_x=test_x, coor_y=test_y) 
     
