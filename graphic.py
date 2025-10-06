@@ -2,66 +2,48 @@ import plotly.offline as offline
 import plotly.graph_objects as go
 
 
+
 # Функция для построения графика
 def construct_graphic(coor_x: list[int | float | str], coor_y: list[int | float]):
-    
+
     """Функция принимает на вход два списка и по ним строит график.
 
     Args:
         coor_x (list[int | float | str]): Список координат x (Например, h - время)
         coor_y (list[int | float]): Список координат y (Например, t - температура)
     """
-    
-    const_color_1 = "#53279A"  # Основной цвет
-    const_color_2 = "#AC2F27"  # Цвет для "предсказания"
+
+    const_color_1 = "#00FFFF"  # Основной цвет 
+    const_color_2 = "#7DF9FF"  # Цвет для "предсказания" 
 
     fig = go.Figure()
 
-    # Добавляем основной трейс для первых отрезков линии
+    # Основной трейс для первых отрезков линии
     fig.add_trace(go.Scatter(
         x=coor_x[:-3],  # Все, кроме последних трех x
         y=coor_y[:-3],  # Все, кроме последних трех y
         mode='lines+markers',
-        marker=dict(size=8, color=const_color_1),
-        line=dict(color=const_color_1),
+        marker=dict(size=8, color=const_color_1, line=dict(width=2, color='white')),  
+        line=dict(color=const_color_1, width=3),  
         name='Основной',
         showlegend=False
     ))
 
+    # Дополнительный трейс для "предсказания" (Последние 3 промежутка)
     fig.add_trace(go.Scatter(
-        x=coor_x[-4:-2],
-        y=coor_y[-4:-2],
+        x=coor_x[-4:],  # Последние 4 точки
+        y=coor_y[-4:],  # Последние 4 точки
         mode='lines+markers',
-        marker=dict(size=8, color=const_color_2),
-        line=dict(color=const_color_2),
+        marker=dict(size=8, color=const_color_2, line=dict(width=2, color='white')),  
+        line=dict(color=const_color_2, width=3, dash='dash'),  
         name='Предсказание',
         showlegend=False
     ))
 
-    fig.add_trace(go.Scatter(
-        x=coor_x[-3:-1],
-        y=coor_y[-3:-1],
-        mode='lines+markers',
-        marker=dict(size=8, color=const_color_2),
-        line=dict(color=const_color_2),
-        name='Предсказание',
-        showlegend=False
-    ))
-
-    fig.add_trace(go.Scatter(
-        x=coor_x[-3:],
-        y=coor_y[-3:],
-        mode='lines+markers',
-        marker=dict(size=8, color=const_color_2),
-        line=dict(color=const_color_2),
-        name='Предсказание',
-        showlegend=False
-    ))
-
-    # Обновляем макет графика
+    
     fig.update_layout(
-        width=800,
-        height=450,
+        width=800,  
+        height=450, 
         title='График погоды',
         xaxis_title='Время',
         yaxis_title='Температура',
@@ -76,10 +58,10 @@ def construct_graphic(coor_x: list[int | float | str], coor_y: list[int | float]
     )
 
     offline.plot(fig, filename='graphic_html.html', auto_open=False, include_plotlyjs='cdn')
-    
+
  # Тестовые данные   
-test_x = ['6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00']
-test_y = [-6, -4, -2, 0, 1, 3, 5, 7, 9]
+test_x = ['5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00']
+test_y = [-6, -4, -2, 0, 1, 3, 5, 7]
 
 construct_graphic(coor_x=test_x, coor_y=test_y) 
     
