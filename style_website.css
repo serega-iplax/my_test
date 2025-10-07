@@ -71,3 +71,15 @@ body {
 .input3 input[type="submit"]:hover {
     background-color: #4285f4;
 }
+
+
+/** График */
+
+
+.graphic {
+  width: 100%; 
+  max-width: 1000px;  
+  position: relative; 
+  top: 200px;
+  left: 20px;
+}

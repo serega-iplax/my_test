@@ -41,12 +41,7 @@ def construct_graphic(coor_x: list[int | float | str], coor_y: list[int | float]
     ))
 
     
-    fig.update_layout(
-        width=800,  
-        height=450, 
-        title='График погоды',
-        xaxis_title='Время',
-        yaxis_title='Температура',
+    fig.update_layout( 
         font=dict(
             family="Courier New, monospace",
             size=20,
@@ -60,8 +55,8 @@ def construct_graphic(coor_x: list[int | float | str], coor_y: list[int | float]
     offline.plot(fig, filename='graphic_html.html', auto_open=False, include_plotlyjs='cdn')
 
  # Тестовые данные   
-test_x = ['5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00']
-test_y = [-6, -4, -2, 0, 1, 3, 5, 7]
+test_x = ["15.10.25", "16.10.25", "17.10.25", "18.10.25", "19.10.25"]
+test_y = ["9°C", "7°C", "8°C", "8°C", "6°C"]
 
 construct_graphic(coor_x=test_x, coor_y=test_y) 
     
