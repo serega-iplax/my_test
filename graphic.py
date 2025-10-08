@@ -1,5 +1,6 @@
 import plotly.offline as offline
 import plotly.graph_objects as go
+import os
 
 
 
@@ -12,7 +13,9 @@ def construct_graphic(coor_x: list[int | float | str], coor_y: list[int | float]
         coor_x (list[int | float | str]): Список координат x (Например, h - время)
         coor_y (list[int | float]): Список координат y (Например, t - температура)
     """
-
+    if os.path.exists("graphic_html.html"):
+        os.remove("graphic_html.html")
+        
     const_color_1 = "#00FFFF"  # Основной цвет 
     const_color_2 = "#7DF9FF"  # Цвет для "предсказания" 
 
@@ -40,8 +43,10 @@ def construct_graphic(coor_x: list[int | float | str], coor_y: list[int | float]
         showlegend=False
     ))
 
+    title_text = f"График по данным с {coor_x[0]} по {coor_x[-1]}"
     
-    fig.update_layout( 
+    fig.update_layout(
+        title=title_text,
         font=dict(
             family="Courier New, monospace",
             size=20,

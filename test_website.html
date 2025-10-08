@@ -1,30 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather visualizer pro</title>
-    <link href="style_website.css" rel="stylesheet"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Weather visualizer pro</title>
+<!-- Подключаем Plotly.js для построения графиков -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<link href="style_website.css" rel="stylesheet"/>
 </head>
 <body>
-    <header class="header-container">
-        <div class="forma">
-            <form action="/">
-                <div class="form_input">
-                    <div class="label1">
-                        <label for="city">Введите город</label>
-                    </div>
-                    <div class="input1">
-                        <input type="text" id="city"
-                        placeholder="Пример: Москва">
-                    </div>
-                    <div class="input3">
-                        <input type="submit" value="Показать">
-                    </div>
+<header class="header-container">
+    <div class="forma">
+        <form id="cityForm" action="/" method="post">
+            <div class="form_input">
+                <div class="label1">
+                    <label for="city">Введите город</label>
                 </div>
-            </form>
-        </div> 
-    </header>       
+                <div class="input1">
+                    <input type="text" id="city" name="city" placeholder="Пример: Москва" required>
+                </div>
+                <div class="input3">
+                    <input type="submit" value="Показать">
+                </div>
+            </div>
+        </form>
+    </div> 
+</header> 
+
+<!-- Контейнер для графика -->
+<div id="chart" style="width: 100%; height: 600px;"></div>
+
+<script>
+  document.getElementById('cityForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // отключаем стандартную отправку формы
+
+    const city = document.getElementById('city').value;
+
+    fetch('http://127.0.0.1:5000/get_weather', {  // предполагаем, что у вас есть маршрут /get_weather
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ city: city })
+    })
+    .then(response => response.json())
+    .then(data => {
+      // data ожидается как { dates: [...], temperatures: [...] }
+      if (data.dates && data.temperatures) {
+        // строим график
+        Plotly.newPlot('chart', [{
+          x: data.dates,
+          y: data.temperatures,
+          mode: 'lines+markers',
+          marker: { size: 8, color: "#00ffff" },
+          line: { color: "#00ffff", width: 3 },
+          name: 'Температура'
+        }], {
+          title: 'Температура по датам'
+        });
+      } else {
+        alert('Нет данных для этого города или произошла ошибка.');
+      }
+    })
+    .catch(error => {
+      console.error('Ошибка:', error);
+      alert('Ошибка при получении данных.');
+    });
+  });
+</script>
 </body>
 </html>
-        
