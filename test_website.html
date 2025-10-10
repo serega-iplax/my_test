@@ -36,7 +36,7 @@
 
     const city = document.getElementById('city').value;
 
-    fetch('http://127.0.0.1:5000/get_weather', {  // предполагаем, что у вас есть маршрут /get_weather
+    fetch("https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={api_key}&units=metric", {  // предполагаем, что у вас есть маршрут /get_weather
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
